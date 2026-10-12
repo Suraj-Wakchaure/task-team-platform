@@ -4,6 +4,13 @@ A full-stack MERN application for managing team tasks, deadlines, priorities, an
 
 ---
 
+## Live Deployment Links
+
+- **Frontend (Live App):** https://task-team-platform-j97umry5m-suraj-wakchaures-projects.vercel.app/login
+- **Backend (API):** https://task-team-platform.onrender.com
+
+---
+
 ## Tech Stack
 
 - **Frontend:** React 19, Vite, Tailwind CSS, Lucide React, Redux Toolkit, Axios
