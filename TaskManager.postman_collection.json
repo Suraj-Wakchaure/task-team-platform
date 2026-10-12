@@ -2,19 +2,35 @@
   "info": {
     "_postman_id": "a518b401-df0e-4b9d-b654-f3d2b09ede13",
     "name": "TaskManager",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "55575984",
-    "_collection_link": "https://go.postman.co/collection/55575984-a518b401-df0e-4b9d-b654-f3d2b09ede13?source=collection_link"
+    "description": "Complete Postman collection for Task & Team Management Platform API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://task-team-platform.onrender.com",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
   "item": [
     {
-      "name": "login",
+      "name": "Register",
       "request": {
         "method": "POST",
-        "header": [],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"email\": \"suraj.wakchaure@gmail.com\",\r\n    \"password\": \"password@1234\"\r\n}",
+          "raw": "{\n  \"name\": \"Suraj Wakchaure\",\n  \"email\": \"suraj.wakchaure@gmail.com\",\n  \"password\": \"SSW@pass123\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -22,27 +38,26 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5000/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "5000",
-          "path": [
-            "login"
-          ]
+          "raw": "{{baseUrl}}/register",
+          "host": ["{{baseUrl}}"],
+          "path": ["register"]
         }
       },
       "response": []
     },
     {
-      "name": "register",
+      "name": "Login",
       "request": {
         "method": "POST",
-        "header": [],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"name\": \"Suraj Wakchaure\",\r\n    \"email\": \"suraj.wakchaure@gmail.com\",\r\n    \"password\": \"password@1234\"\r\n}",
+          "raw": "{\n  \"email\": \"suraj.wakchaure@gmail.com\",\n  \"password\": \"SSW@pass123\",\n  \"rememberMe\": true\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -50,37 +65,59 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5000/register",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "5000",
-          "path": [
-            "register"
-          ]
+          "raw": "{{baseUrl}}/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["login"]
         }
       },
       "response": []
     },
     {
-      "name": "task",
+      "name": "Get All Tasks",
       "request": {
         "auth": {
           "type": "bearer",
           "bearer": [
             {
               "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhY2M3OTAxODVjNzM4ZGQ2YjIwZWIzMyIsImlhdCI6MTc5MTc4NTIyOSwiZXhwIjoxNzkxODcxNjI5fQ.hwPFvHfIP4dZYstIOury0M-8FqoW2XE2uGc7O-S9eNo",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Task",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
               "type": "string"
             }
           ]
         },
         "method": "POST",
-        "header": [],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"title\": \"Database design\",\r\n  \"description\": \"Create models for user and task\",\r\n  \"priority\": \"High\",\r\n  \"status\": \"Pending\",\r\n  \"dueDate\": \"2026-10-15\"\r\n}\r\n",
+          "raw": "{\n  \"title\": \"Design Authentication API & JWT Flow\",\n  \"description\": \"Implement token generation with bcrypt hashing and conditional Remember-Me expiry.\",\n  \"priority\": \"High\",\n  \"status\": \"In Progress\",\n  \"dueDate\": \"2026-10-18\",\n  \"assignedUser\": null\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -88,59 +125,65 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5000/tasks",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "5000",
-          "path": [
-            "tasks"
-          ]
+          "raw": "{{baseUrl}}/tasks",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"]
         }
       },
       "response": []
     },
     {
-      "name": "get tasks",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": ""
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "retrieve task",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": ""
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "update task",
+      "name": "Retrieve Task by ID",
       "request": {
         "auth": {
           "type": "bearer",
           "bearer": [
             {
               "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhY2M3OTAxODVjNzM4ZGQ2YjIwZWIzMyIsImlhdCI6MTc5MTc4NTIyOSwiZXhwIjoxNzkxODcxNjI5fQ.hwPFvHfIP4dZYstIOury0M-8FqoW2XE2uGc7O-S9eNo",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "TASK_ID_HERE"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Task",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
               "type": "string"
             }
           ]
         },
         "method": "PUT",
-        "header": [],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"status\": \"In Progress\"\r\n}",
+          "raw": "{\n  \"status\": \"Completed\",\n  \"priority\": \"Medium\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -148,49 +191,96 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5000/tasks/6acc79a385c738dd6b20eb34",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "5000",
-          "path": [
-            "tasks",
-            "6acc79a385c738dd6b20eb34"
+          "raw": "{{baseUrl}}/tasks/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "TASK_ID_HERE"
+            }
           ]
         }
       },
       "response": []
     },
     {
-      "name": "delete task",
+      "name": "Delete Task",
       "request": {
-        "method": "GET",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
         "header": [],
         "url": {
-          "raw": ""
+          "raw": "{{baseUrl}}/tasks/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "TASK_ID_HERE"
+            }
+          ]
         }
       },
       "response": []
     },
     {
-      "name": "get all users",
+      "name": "Get All Users",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
         "method": "GET",
         "header": [],
         "url": {
-          "raw": ""
+          "raw": "{{baseUrl}}/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["users"]
         }
       },
       "response": []
     },
     {
-      "name": "delete user",
+      "name": "Delete User",
       "request": {
-        "method": "GET",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
         "header": [],
         "url": {
-          "raw": ""
+          "raw": "{{baseUrl}}/users/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "USER_ID_HERE"
+            }
+          ]
         }
       },
       "response": []
